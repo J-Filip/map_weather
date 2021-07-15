@@ -1,0 +1,27 @@
+  
+ p{
+    background-color:#e0deda;
+    padding: 2em ;
+    font-size: 1em;
+}
+
+.location-history p{
+    padding: 2em;
+}
+
+video{
+    margin: 1em 0;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 600;
+    color: blueviolet;
+    padding: .6em;
+}
+
+#mapid {
+    height: 400px;
+    width: 800px;
+    margin: auto;
+  }

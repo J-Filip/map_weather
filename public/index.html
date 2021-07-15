@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta class="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- link to a  p5.js library we use for drawing     -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.min.js"></script>
+  <link  rel="stylesheet" href="style.css" type="text/css">
+ 
+
+
+  <title>Map Weather </title>
+</head>
+
+<body>
+<h1> Check-in </h1>
+
+
+  
+<a href="/">Home</a>
+<a href="/logs">Logs</a>
+<div class="geolocation" id="geolocation-all">
+  <h2>Send coordinates:</h2>
+  <p>Latitude: <span id="lat"></span></p>
+  <p>Longitude: <span id="lon"></span></p>
+  <p>
+    The temperature in <span id="city">(YOUR LOCATION)</span> is currently <span id="temperature">(CURRENT TEMPERATURE)</span> °​C. <br>
+    <span id="air_quality-all">  AIR QUALITY ( last updated:  <span id="air_quality-last_updated"> </span>)<br>
+    The concentration of particulate matter  <span id= 'air_quality-parameter'> (AIR quality) </span> is <span id= 'air_quality-value'></span> <span id="air_quality-unit"></span>. </span>
+  
+  </p>
+  <!--    
+  <input id="nicknameInput" type="text" placeholder="Your nickname">
+  -->
+ 
+</div>
+
+
+
+
+
+
+
+<script src="geolocation.js"></script>
+
+</body>
+
+</html>

@@ -18,13 +18,15 @@
 <h1> Check-in </h1>
 
 
-  
-<a href="/">Home</a>
-<a href="/logs">Logs</a>
+  <div id="header"> 
+  <a href="/">Check-in</a>
+  <a href="/logs">Logs</a>
+  </div>
 <div class="geolocation" id="geolocation-all">
-  <h2>Send coordinates:</h2>
-  <p>Latitude: <span id="lat"></span></p>
-  <p>Longitude: <span id="lon"></span></p>
+  <h2>Your coordinates:</h2>
+  <p>Latitude: <span id="lat"></span>°</p>
+  <p>Longitude: <span id="lon"></span>°</p>
+  <h2>Weather and air quality data:</h2>
   <p>
     The temperature in <span id="city">(YOUR LOCATION)</span> is currently <span id="temperature">(CURRENT TEMPERATURE)</span> °​C. <br>
     <span id="air_quality-all">  AIR QUALITY ( last updated:  <span id="air_quality-last_updated"> </span>)<br>

@@ -5,7 +5,7 @@
 // TODO 
 const filterAll = document.getElementById('filterAll');
 // ! listeners
-filterAll.addEventListener('click', getWeather);
+//filterAll.addEventListener('click', getWeather);
 
 
 // ! functions

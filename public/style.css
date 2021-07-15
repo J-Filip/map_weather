@@ -1,27 +1,30 @@
-  
+body{
+    margin:1.5em;
+}
  p{
-    background-color:#e0deda;
-    padding: 2em ;
+    background-color:rgba(154, 184, 241, 0.664);
+    padding: 1.3em .8em;
     font-size: 1em;
 }
 
 .location-history p{
-    padding: 2em;
+    padding: .3em .8em;
+    background-color:rgba(109, 156, 243, 0.39);
+}
+#header  {
+    margin: .8em;
 }
 
-video{
-    margin: 1em 0;
-}
-
-a {
+#header a {
     text-decoration: none;
-    font-weight: 600;
-    color: blueviolet;
-    padding: .6em;
+    font-weight: 800;
+    color: rgba(50, 118, 245, 0.966);
+    padding-right: 1em;
 }
 
 #mapid {
     height: 400px;
     width: 800px;
     margin: auto;
+    
   }

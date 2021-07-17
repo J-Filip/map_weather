@@ -23,6 +23,8 @@ async function getWeather() {
   for(e of data){
     // one row from database 
     //console.log(e);
+    const timestamp = new Date().toLocaleString('ro-RO');
+    e.timestamp = timestamp; 
       
       // DOM creating
       const logDiv = document.createElement('p')
@@ -34,7 +36,7 @@ async function getWeather() {
         console.log('no air quality');
         console.log(e);
         row.innerText = `Timestamp: ${e.timestamp}
-        City: ${e.weather.name}  ||Country: ${e.weather.sys.country} || Longitude: ${e.weather.coord.lon}° Latitude: ${e.weather.coord.lat}° || Temperature: ${e.weather.main.temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa `;
+        Area: ${e.weather.name}  ||Country: ${e.weather.sys.country} || Longitude: ${e.weather.coord.lon}° Latitude: ${e.weather.coord.lat}° || Temperature: ${e.weather.main.temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa `;
       }else {
 
         row.innerText = `Timestamp: ${e.timestamp}

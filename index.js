@@ -26,7 +26,7 @@ app.use(express.json({limit: '1mb'}));
 let database = new Datastore('database.db');
 // load data from server into memory - creates new .db file when run fisrt time
 database.loadDatabase();
-database.insert('TEST - inserted text into .db file');
+//database.insert('TEST - inserted text into .db file');
 // database.insert({
 //     agent: 'Filip',
 //     status: 'spreman',
@@ -89,7 +89,8 @@ app.post('/api/weather', (request, response) =>{
 // ! when client sends GET request to server
 app.get('/api/weather', (request, response)=>{
     console.log('GET REQUEST FROM CLIENT');
-    database.find({},(err, data) =>{
+    // database.find({},(err, data) =>{
+        database.find({}).sort({ timestamp:-1}).limit(30).exec(function (err, data) {
         if(err){
             response.end();
             return;

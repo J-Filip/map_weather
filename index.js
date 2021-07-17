@@ -72,8 +72,9 @@ app.post('/api/weather', (request, response) =>{
     console.log('GOT CLIENT REQUEST'); 
     const requestData = request.body;
     // create timestamp and add to request body
-    const timestamp = new Date().toLocaleString('ro-RO');
+    const timestamp = new Date().toLocaleString('de-DE');
     requestData.timestamp = timestamp; 
+    console.log(timestamp);
     
     // insert client request data to database
     database.insert(requestData);

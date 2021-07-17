@@ -10,7 +10,7 @@ function setup() {
   // const video = createCapture(VIDEO);
   // video.size(240, 180);
   if ('geolocation' in navigator) {
-    console.log('geolocation available');
+   // console.log('geolocation available');
     //const sendLocation = document.querySelector('.send-location');
     //sendLocation.addEventListener('click', async (event) => {
       // we made it an async function to wait for fetch response
@@ -28,7 +28,7 @@ function setup() {
             alert('Please enter Your nickname !');
             return ;
           }else{
-            console.log('cool nickname');
+            //console.log('cool nickname');
             document.querySelector("#nickname-input").value = '';
           }
         
@@ -41,7 +41,7 @@ function setup() {
         // air and weather rewquest from our server
         let apiResponse = await fetch(`/api/weather/${lat},${lon}`)
         let apiJson = await apiResponse.json(); 
-        console.log(apiJson);
+        //console.log(apiJson);
         
         // our response is fetched data from server side API fetch 
         weather = apiJson.weather;

@@ -30,6 +30,8 @@ function setup() {
           }else{
             //console.log('cool nickname');
             document.querySelector("#nickname-input").value = '';
+            // message after check-in
+            document.getElementById('logs-after').innerHTML = 'Go to <a href="/logs">Logs</a> to see Your location on the map.';
           }
         
         // DOM manipulation
@@ -57,8 +59,7 @@ function setup() {
           const dateNow = new Date(lastUpdated).toLocaleString('ro-RO');
           document.getElementById('air_quality-last_updated').textContent = dateNow;
 
-          // message after check-in
-          document.getElementById('logs-after').innerHTML = 'Go to <a href="/logs">Logs</a> to see Your location on the map.';
+          
 
           // error handling
           }catch (error){

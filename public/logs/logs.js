@@ -23,8 +23,8 @@ async function getWeather() {
   for(e of data){
     // one row from database 
     //console.log(e);
-    const timestamp = new Date().toLocaleString('ro-RO');
-    e.timestamp = timestamp; 
+    // const timestamp = new Date().toLocaleString('ro-RO');
+    // e.timestamp = timestamp; 
       
       // DOM creating
       const logDiv = document.createElement('p')
@@ -61,6 +61,7 @@ async function placeMarker() {
  let response = await fetch('/api/weather');
  let data = await response.json();
  //console.log(data);
+ 
 
   for(e of data){
     const { lat, lon, weather:{name:name, main:{temp:temp}}}= e;
@@ -73,7 +74,6 @@ async function placeMarker() {
       markerText += `The concentration of particulate matter is ${e.airQuality.results[0].measurements[0].value}  ${e.airQuality.results[0].measurements[0].unit}`;
 
     }
-
   // destructuring uuuu
   const marker = L.marker([lat, lon]).addTo(mymap);
   marker.bindPopup(markerText); 

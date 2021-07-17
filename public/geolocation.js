@@ -1,6 +1,6 @@
 
 
-let x = document.querySelector('.geolocation');
+const checkInBtn = document.getElementById('check-in_button');
 //console.log(x.textContent);
 
 // runs onLoad
@@ -14,20 +14,29 @@ function setup() {
     //const sendLocation = document.querySelector('.send-location');
     //sendLocation.addEventListener('click', async (event) => {
       // we made it an async function to wait for fetch response
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        let lat, lon, weather, airQuality;
+      checkInBtn.addEventListener('click', () => {
 
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          let lat, lon, nickname, weather, airQuality;
+          
         try{
-
+          
           lat = position.coords.latitude;
           lon = position.coords.longitude;
-          // video.loadPixels();
-        // const image64 = video.canvas.toDataURL();
-
+          nickname = document.querySelector("#nickname-input").value;
+          if (nickname === ''){
+            alert('Please enter Your nickname !');
+            return ;
+          }else{
+            console.log('cool nickname');
+            document.querySelector("#nickname-input").value = '';
+          }
+        
         // DOM manipulation
-        document.getElementById('lat').textContent = lat;
-        document.getElementById('lon').textContent = lon;
-        //let nickname = document.getElementById('nicknameInput').value;
+        document.getElementById('lat').textContent = ` ${lat}°`;
+        document.getElementById('lon').textContent = ` ${lon}°`;
+        document.getElementById('nickname').textContent = ` ${nickname}!`;
+        
         
         // air and weather rewquest from our server
         let apiResponse = await fetch(`/api/weather/${lat},${lon}`)
@@ -39,16 +48,18 @@ function setup() {
         airQuality = apiJson.air_quality;
         
         // dom manipulation - weather and air
-        
           document.getElementById('city').textContent = weather.name;
           document.getElementById('temperature').textContent = weather.main.temp;
-          
           document.getElementById('air_quality-parameter').textContent = airQuality.results[0].measurements[0].parameter;
           document.getElementById('air_quality-value').textContent = airQuality.results[0].measurements[0].value;
           document.getElementById('air_quality-unit').textContent = airQuality.results[0].measurements[0].unit;
           const lastUpdated = airQuality.results[0].measurements[0].lastUpdated;
           const dateNow = new Date(lastUpdated).toLocaleString('ro-RO');
           document.getElementById('air_quality-last_updated').textContent = dateNow;
+
+          // message after check-in
+          document.getElementById('logs-after').innerHTML = 'Go to <a href="/logs">Logs</a> to see Your location on the map.';
+
           // error handling
           }catch (error){
             console.error(error);
@@ -60,7 +71,7 @@ function setup() {
           
           
           // put data in object
-          const data = { lat, lon, weather, airQuality};
+          const data = { lat, lon, nickname, weather, airQuality};
           // we specify options because we are now using POST method
           const options = {
             method: 'POST',
@@ -69,17 +80,18 @@ function setup() {
             },
             body: JSON.stringify(data),
           };        
-
+          
           // šaljemo response na server koji tamo insertamo u bazu
           const dbResponse = await fetch('/api/weather', options);
           const dbJson = await dbResponse.json();
           // we send msg from server back to client (ex. SUCCESS or FAILED) 
           console.log(dbJson);
-       
-     
-       });
-  // });
-  // if geolocation available in browser
+          
+        })
+          
+        });
+        // });
+        // if geolocation available in browser
   } else {
     console.log('geolocation not available');
     document.getElementById('geolocation-all').textContent = 'GEOLOCATION NOT AVAILABLE';

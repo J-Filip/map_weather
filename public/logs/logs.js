@@ -36,6 +36,7 @@ async function getWeather() {
         console.log('no air quality');
         console.log(e);
         row.innerText = `Timestamp: ${e.timestamp}
+        Nickname: ${e.nickname}
         Area: ${e.weather.name}  ||Country: ${e.weather.sys.country} || Longitude: ${e.weather.coord.lon}° Latitude: ${e.weather.coord.lat}° || Temperature: ${e.weather.main.temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa `;
       }else {
 
@@ -75,16 +76,8 @@ async function placeMarker() {
 
   // destructuring uuuu
   const marker = L.marker([lat, lon]).addTo(mymap);
-
-  
   marker.bindPopup(markerText); 
-
-
-
-}
-
-
-
+  }
 };
 
 

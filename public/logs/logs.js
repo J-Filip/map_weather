@@ -38,13 +38,23 @@ async function getWeather() {
         //console.log(e);
         row.innerText = `Timestamp: ${timestamp}
         Nickname: ${nickname}
-        Area: ${name}  ||Country: ${e.weather.sys.country} || Longitude: ${lon}° Latitude: ${lat}° || Temperature: ${temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa `;
+        Area: ${name}  
+        Country: ${e.weather.sys.country}
+        Longitude: ${lon}° 
+        Latitude: ${lat}° 
+        Temperature: ${temp} °C 
+        Atmospheric pressure: ${e.weather.main.pressure} hPa `;
       }else {
 
         row.innerText = `Timestamp: ${e.timestamp}
-        City: ${e.weather.name}  ||Country: ${e.weather.sys.country} || Longitude: ${e.weather.coord.lon}° Latitude: ${e.weather.coord.lat}° || Temperature: ${e.weather.main.temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa 
-        Air Quality: ${e.airQuality.results[0].measurements[0].value}  ${e.airQuality.results[0].measurements[0].unit} `
-        //rowImage.src = e.image64;
+        Nickname: ${nickname}
+        City: ${e.weather.name}
+        Country: ${e.weather.sys.country}
+        Longitude: ${e.weather.coord.lon}° 
+        Latitude: ${e.weather.coord.lat}° 
+        Temperature: ${e.weather.main.temp} °C 
+        Atmospheric pressure: ${e.weather.main.pressure} hPa 
+        Air Quality: ${e.airQuality.results[0].measurements[0].value}  ${e.airQuality.results[0].measurements[0].unit} `;
       }
         
       // DOM appending elements

@@ -21,10 +21,10 @@
 
 
 <div id="header"> 
-  <h1> My Logs</h1>
+  <h1> Croatia logs</h1>
   
   <a href="/index.html">Check-in</a>
-  <a href="/logs">Logs</a>
+  <a href="/logs">All Logs</a>
 </div>
    
 
@@ -35,7 +35,7 @@
     <div id="mapid">
       
     </div>
-    <h2>My Location history:</h2>
+    <h2>Location history:</h2>
     <div class="location-history">
       <div/>
     </section>
@@ -58,7 +58,7 @@
 
 <script>
   // setview is latitude and longitude and zoom
-  const mymap = L.map('mapid').setView([45.8150, 15.9780], 12);
+  const mymap = L.map('mapid').setView([45.8150, 15.9780], 6);
 
   // url for tiles used in building a map 
   L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {

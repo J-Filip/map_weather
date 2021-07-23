@@ -6,9 +6,10 @@
 const express = require ('express');
 const Datastore = require('nedb');
 const fetch = require('node-fetch');
-const pool = require('./database');
+const pool = require('./db');
 require('dotenv').config();
 
+//const enviroment = process.env.NODE_ENV || 'development';
 
 
 
@@ -19,6 +20,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 // listen on localhost 3000 and log msg
 app.listen(port, () => console.log(`Server listening at ${port}`));
+
+
 // host static files from folder 'public'
 app.use(express.static('public'));
 
@@ -48,12 +51,11 @@ app.get('/api/weather/:latlon', async (request, response)=>{
     const requestData =  request.params.latlon.split(','); 
     const lat = requestData[0];
     const lon = requestData[1];
-   // const nickname = requestData[2];
 
     // todo - use promise all instead
     // we fetch api server side because we use API KEY (CORS)
     const apiKey = process.env.API_KEY;
-    console.log(apiKey);
+    //console.log(apiKey);
     let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
     let weatherData = await weatherResponse.json();
     //console.log(weatherData);
@@ -84,11 +86,13 @@ app.post('/api/weather', async (request, response) =>{
     database.insert(requestData);
     
     // destructure data for postgres db
-    const {nickname,  lat, lon, weather:{name:name, main:{temp:temp}}} = requestData;
+    const {nickname,  lat, lon, weather:{sys:{country:country}}} = requestData;
+    const area = requestData.weather.name;
+    //console.log(area);
     // insert client request data to postgresDB 
     // returning returns inserted rows 
     try{
-        const newCheckin = await pool.query('INSERT INTO checkin (nickname, timestamp, lat, lon) VALUES ($1, $2, $3, $4) RETURNING *', [nickname, timestamp, lat, lon ]);
+        const newCheckin = await pool.query('INSERT INTO checkin (nickname, timestamp, lat, lon, country, area) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [nickname, timestamp, lat, lon, country, area]);
         // response from server to client
         response.json({
             // send this msg back to client when server gets request 
@@ -106,7 +110,7 @@ app.post('/api/weather', async (request, response) =>{
 // ! when client sends GET request to server
 app.get('/api/weather', async  (request, response)=>{
     console.log('GET REQUEST FROM CLIENT');
-        database.find({}).sort({ timestamp:-1}).limit(30).exec(function (err, data) {
+        database.find({}).sort({ timestamp:-1}).limit(20).exec(function (err, data) {
         if(err){
             response.end();
             return;
@@ -117,10 +121,25 @@ app.get('/api/weather', async  (request, response)=>{
 })
 
 // ! when client sends GET request to server - my checkins
-app.get('/api/my-logs', async  (request, response)=>{
+app.get('/api/mylogs', async  (request, response)=>{
     console.log('GET REQUEST FROM CLIENT');
+
     // get data from postgres DB
     const pgNicknames = await pool.query('SELECT * FROM checkin')
+    
+    // response to client is data from database as json
+    //console.log(pgNicknames.rows);
+    response.json(pgNicknames.rows);
+});
+
+
+// ! when client sends GET request to server - my checkins
+app.get('/api/mylogs/:country', async  (request, response)=>{
+    console.log('GET REQUEST FROM CLIENT');
+    const {country} = request.params;
+
+    // get data from postgres DB
+    const pgNicknames = await pool.query('SELECT * FROM checkin WHERE country = $1 ORDER BY timestamp DESC LIMIT 20 ', [country])
     
     // response to client is data from database as json
     //console.log(pgNicknames.rows);

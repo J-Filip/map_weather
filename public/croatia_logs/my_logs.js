@@ -18,15 +18,19 @@
 getWeather();
 
 async function getWeather() {
+// air and weather rewquest from our server
+// let apiResponse = await fetch(`/api/weather/mylogs`)
+// let apiJson = await apiResponse.json(); 
+
   let locationHistory = document.querySelector('.location-history');
   locationHistory.innerHTML = '';
   // send GET request to server
-  let response = await fetch('/api/my-logs');
+  let response = await fetch('/api/mylogs/HR');
   let data = await response.json();
   console.log(data);
   // response from server is data from database
   for(e of data){
-    const { nickname, timestamp, lat, lon}= e;
+    const { nickname, timestamp, lat, lon, country, area}= e;
     // one row from database    
       // DOM creating elements
       const logDiv = document.createElement('p')
@@ -35,8 +39,10 @@ async function getWeather() {
 
         row.innerText = `Timestamp: ${timestamp}
         Nickname: ${nickname}
+        Country: ${country}
         Longitude: ${lon}°
-        Latitude: ${lat}° `;
+        Latitude: ${lat}° 
+        Area: ${area}`;
         
         // City: ${e.weather.name} ||Country: ${e.weather.sys.country}|| Temperature: ${e.weather.main.temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa 
         // Air Quality: ${e.airQuality.results[0].measurements[0].value}  ${e.airQuality.results[0].measurements[0].unit} `
@@ -50,9 +56,9 @@ async function getWeather() {
 placeMarker();
 async function placeMarker() {
  // send GET request to server
- let response = await fetch('/api/my-logs');
+ let response = await fetch('/api/mylogs/HR');
  let data = await response.json();
- console.log(data);
+ //console.log(data);
  
   for(e of data){
     // destructuring uuuu

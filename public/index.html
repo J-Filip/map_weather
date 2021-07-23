@@ -20,21 +20,19 @@
 
   <div id="header"> 
   <a href="/">Check-in</a>
-  <a href="/logs">Logs</a>
-  <a href="/my_logs">My Logs</a>
+  <a href="/logs">All Logs</a>
+  <a href="/croatia_logs">Croatia Logs</a>
   </div>
 <div class="geolocation" id="geolocation-all">
   <h2>Your coordinates:</h2>
   <p>Latitude: <span id="lat"></span></p>
   <p>Longitude: <span id="lon"></span></p>
   <h2>Weather and air quality data:</h2>
-  <p>
-    Hi <span id="nickname"></span><br><br>
-    The temperature in <span id="city">(YOUR LOCATION)</span> is currently <span id="temperature">(CURRENT TEMPERATURE)</span> °​C. <br>
-    <span id="air_quality-all">  AIR QUALITY ( last updated:  <span id="air_quality-last_updated"> </span>)<br>
-    The concentration of particulate matter  <span id= 'air_quality-parameter'> (AIR quality) </span> is <span id= 'air_quality-value'></span> <span id="air_quality-unit"></span>. </span>
-  
-  </p>
+  <p id="data">
+     Please check-in to see data for Your location...
+    </p>
+    
+   
      
   <input id="nickname-input" type="text" placeholder="Your nickname">
   <button id='check-in_button'>Check-in</button>

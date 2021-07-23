@@ -34,39 +34,50 @@ function setup() {
             document.getElementById('logs-after').innerHTML = 'Go to <a href="/logs">Logs</a> to see Your location on the map.';
           }
         
-        // DOM manipulation
-        document.getElementById('lat').textContent = ` ${lat}°`;
-        document.getElementById('lon').textContent = ` ${lon}°`;
-        document.getElementById('nickname').textContent = ` ${nickname}!`;
-        
-        
-        // air and weather rewquest from our server
-        let apiResponse = await fetch(`/api/weather/${lat},${lon}`)
-        let apiJson = await apiResponse.json(); 
-        //console.log(apiJson);
-        
-        // our response is fetched data from server side API fetch 
-        weather = apiJson.weather;
-        airQuality = apiJson.air_quality;
-        
-        // dom manipulation - weather and air
-          document.getElementById('city').textContent = weather.name;
-          document.getElementById('temperature').textContent = weather.main.temp;
-          document.getElementById('air_quality-parameter').textContent = airQuality.results[0].measurements[0].parameter;
-          document.getElementById('air_quality-value').textContent = airQuality.results[0].measurements[0].value;
-          document.getElementById('air_quality-unit').textContent = airQuality.results[0].measurements[0].unit;
-          const lastUpdated = airQuality.results[0].measurements[0].lastUpdated;
-          const dateNow = new Date(lastUpdated).toLocaleString('ro-RO');
-          document.getElementById('air_quality-last_updated').textContent = dateNow;
-
           
+          
+          // air and weather rewquest from our server
+          let apiResponse = await fetch(`/api/weather/${lat},${lon}`)
+          let apiJson = await apiResponse.json(); 
+          console.log(apiJson);
+          
+          // our response is fetched data from server side API fetch 
+          weather = apiJson.weather;
+          const area = weather.name;
+          const temperature = weather.main.temp;
+         
+          
+          // DOM manipulation
+          document.getElementById('lat').textContent = ` ${lat}°`;
+          document.getElementById('lon').textContent = ` ${lon}°`;
+          
+          document.getElementById('data').innerText = `Hi ${nickname}!
+          The temperature in ${area} is currently ${temperature} °​C.`;
+
+          airQuality = apiJson.air_quality;
+          const airLastUpdated = airQuality.results[0].measurements[0].lastUpdated;
+          const airParamater = airQuality.results[0].measurements[0].parameter;
+          const airValue =  airQuality.results[0].measurements[0].value;
+          const airUnit = airQuality.results[0].measurements[0].unit;
+
+          document.getElementById('data').innerText += `AIR QUALITY ( last updated: ${airLastUpdated})
+          The concentration of particulate matter ${airParamater} is ${airValue} ${airUnit}`;
+
+          // document.getElementById('city').textContent = weather.name;
+          // document.getElementById('temperature').textContent = weather.main.temp;
+          // document.getElementById('air_quality-parameter').textContent = airQuality.results[0].measurements[0].parameter;
+          // document.getElementById('air_quality-value').textContent = airQuality.results[0].measurements[0].value;
+          // document.getElementById('air_quality-unit').textContent = airQuality.results[0].measurements[0].unit;
+          // const dateNow = new Date(lastUpdated).toLocaleString('ro-RO');
+          // document.getElementById('air_quality-last_updated').textContent = dateNow;
+
 
           // error handling
           }catch (error){
             console.error(error);
             // hardcode air quality if there is no reading
             airQuality = {value:-1}
-            document.getElementById('air_quality-all').textContent = 'NO AIR QUALITY RESULTS FOR THIS LOCATION';
+            document.getElementById('data').innerText += `NO AIR QUALITY RESULTS FOR THIS LOCATION `;
             
           };
           

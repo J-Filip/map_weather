@@ -12,3 +12,7 @@ CREATE TABLE checkin(
     country VARCHAR (5),
     area  VARCHAR (50)
 );
+
+
+INSERT INTO checkin (nickname, timestamp, lat, lon, country, area) 
+VALUES ('ja', 2000, 15.00, 30.00, 'HR', 'Jarun');

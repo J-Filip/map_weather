@@ -20,8 +20,11 @@ const developmentConfig = {
 };
 
 const productionConfig = {
-    connectionString:pg_database_url
-}
+    connectionString:pg_database_url,
+    ssl: {
+        rejectUnauthorized: false
+      }
+};
 
 // if in production, use production configuration, use else development configuration
 const pool = new Pool( 

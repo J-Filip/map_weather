@@ -8,7 +8,7 @@ const pg_password = process.env.PG_PASSWORD;
 const pg_database = process.env.PG_DATABASE;
 const pg_host = process.env.PG_HOST;
 const pg_port = process.env.PG_PORT;
-const pg_database_url = process.env.DATABASE__URL; // we get this from heroku addon -> config vars
+const pg_database_url = process.env.DATABASE_URL; // we get this from heroku addon -> config vars
 
 // confiugurations
 const developmentConfig = { 

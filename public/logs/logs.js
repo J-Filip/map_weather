@@ -21,6 +21,7 @@ async function getWeather() {
   console.log(data);
   // response from server is data from database
   for(e of data){
+    const { lat, lon,timestamp, nickname, weather:{name:name, main:{temp:temp}}}= e;
     // one row from database 
     //console.log(e);
     // const timestamp = new Date().toLocaleString('ro-RO');
@@ -34,10 +35,10 @@ async function getWeather() {
       // insert data into elements
       if(e.airQuality.value === -1){
         console.log('no air quality');
-        console.log(e);
-        row.innerText = `Timestamp: ${e.timestamp}
-        Nickname: ${e.nickname}
-        Area: ${e.weather.name}  ||Country: ${e.weather.sys.country} || Longitude: ${e.weather.coord.lon}° Latitude: ${e.weather.coord.lat}° || Temperature: ${e.weather.main.temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa `;
+        //console.log(e);
+        row.innerText = `Timestamp: ${timestamp}
+        Nickname: ${nickname}
+        Area: ${name}  ||Country: ${e.weather.sys.country} || Longitude: ${lon}° Latitude: ${lat}° || Temperature: ${temp} °C || Atmospheric pressure: ${e.weather.main.pressure} hPa `;
       }else {
 
         row.innerText = `Timestamp: ${e.timestamp}
@@ -64,11 +65,12 @@ async function placeMarker() {
  
 
   for(e of data){
-    const { lat, lon, weather:{name:name, main:{temp:temp}}}= e;
-
-    let markerText = `The temperature in ${name} is currently ${temp} °​C.`
+     const { lat, lon,timestamp, nickname, weather:{name:name, main:{temp:temp}}}= e;
+    
+    let markerText = `${nickname} appeared in ${name} at ${timestamp} and the temperature was ${temp} °​C.`
+    
     if(e.airQuality.value === -1){
-      markerText += '(No air quality reading!)';
+      markerText += '(NO AIR QUALITY READING!)';
     }else {
       
       markerText += `The concentration of particulate matter is ${e.airQuality.results[0].measurements[0].value}  ${e.airQuality.results[0].measurements[0].unit}`;

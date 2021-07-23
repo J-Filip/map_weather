@@ -6,7 +6,9 @@
 const express = require ('express');
 const Datastore = require('nedb');
 const fetch = require('node-fetch');
+const pool = require('./database');
 require('dotenv').config();
+
 
 
 
@@ -16,10 +18,11 @@ const app = express();
 // if envirometal variable or 3000 for local
 const port = process.env.PORT || 3000;
 // listen on localhost 3000 and log msg
-app.listen(port, () => console.log(`listening at ${port}`));
+app.listen(port, () => console.log(`Server listening at ${port}`));
 // host static files from folder 'public'
 app.use(express.static('public'));
 
+// accessing client request's body
 // limit post request on 1mb
 app.use(express.json({limit: '1mb'}));
 // define new instance od datastore
@@ -33,6 +36,7 @@ database.loadDatabase();
 
 // });
 
+// ROUTES // 
 
 // DESC endpoints - where client sends requests
 
@@ -67,30 +71,41 @@ app.get('/api/weather/:latlon', async (request, response)=>{
     response.json(fetchedData);
 
        });
+
 // !  when client sends POST request to server
-app.post('/api/weather', (request, response) =>{
+app.post('/api/weather', async (request, response) =>{
     console.log('GOT CLIENT REQUEST'); 
     const requestData = request.body;
     // create timestamp and add to request body
     const timestamp = new Date().toLocaleString('de-DE');
     requestData.timestamp = timestamp; 
-    console.log(timestamp);
-    
-    // insert client request data to database
+    //console.log(timestamp);
+    // insert client request data to neDB 
     database.insert(requestData);
-
-    // send this msg back to client when server gets request 
-    response.json({
-        status: 'GREAT SUCCESS. Response to server sent !',
-        requestData  
-    });  
+    
+    // destructure data for postgres db
+    const {nickname,  lat, lon, weather:{name:name, main:{temp:temp}}} = requestData;
+    // insert client request data to postgresDB 
+    // returning returns inserted rows 
+    try{
+        const newCheckin = await pool.query('INSERT INTO checkin (nickname, timestamp, lat, lon) VALUES ($1, $2, $3, $4) RETURNING *', [nickname, timestamp, lat, lon ]);
+        // response from server to client
+        response.json({
+            // send this msg back to client when server gets request 
+            status: 'VERY NICE! Data stored in the database !',
+            newCheckin,
+            requestData
+        });  
+    }catch(err){ 
+        console.log(err);
+    };
+    
 })
 
 
 // ! when client sends GET request to server
-app.get('/api/weather', (request, response)=>{
+app.get('/api/weather', async  (request, response)=>{
     console.log('GET REQUEST FROM CLIENT');
-    // database.find({},(err, data) =>{
         database.find({}).sort({ timestamp:-1}).limit(30).exec(function (err, data) {
         if(err){
             response.end();
@@ -100,3 +115,14 @@ app.get('/api/weather', (request, response)=>{
         response.json(data);
     })
 })
+
+// ! when client sends GET request to server - my checkins
+app.get('/api/my-logs', async  (request, response)=>{
+    console.log('GET REQUEST FROM CLIENT');
+    // get data from postgres DB
+    const pgNicknames = await pool.query('SELECT * FROM checkin')
+    
+    // response to client is data from database as json
+    //console.log(pgNicknames.rows);
+    response.json(pgNicknames.rows);
+});

@@ -33,7 +33,7 @@ async function getWeather() {
     const { nickname, timestamp, lat, lon, country, area}= e;
     // one row from database    
       // DOM creating elements
-      const logDiv = document.createElement('p')
+      const logDiv = document.createElement('div')
       const row = document.createElement('p');
       //const rowImage = document.createElement('img');
 

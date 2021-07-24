@@ -28,7 +28,7 @@ async function getWeather() {
     // e.timestamp = timestamp; 
       
       // DOM creating
-      const logDiv = document.createElement('p')
+      const logDiv = document.createElement('div')
       const row = document.createElement('p');
       //const rowImage = document.createElement('img');
 

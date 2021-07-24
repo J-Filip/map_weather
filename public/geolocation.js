@@ -3,8 +3,8 @@
 const checkInBtn = document.getElementById('check-in_button');
 //console.log(x.textContent);
 
-// runs onLoad
-function setup() {
+main();
+function main() {
   // p5.js library drawing
   // noCanvas();
   // const video = createCapture(VIDEO);

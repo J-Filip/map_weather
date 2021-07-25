@@ -1,9 +1,9 @@
-<h1> Find out Your geolocation and get weather and air quality data for the location. You can also see where others have checked-in on the map. </h1>
+<h1>Map Weather </h1>
+<h2> Find out Your geolocation and get weather and air quality data for the location. You can also see where others have checked-in on the map. </h2>
 
 07/2021 UPDATE - added PostgreSQL database 
  
- Modified project based on a tutorial by @joeyklee. My first dive into Node.js and backend development. The point wasn't to make another weather app but to learn to deal with APIs and fetching data.
-
+Modified project based on a tutorial by @joeyklee. My first dive into Node.js and backend development. The point wasn't to make another weather app but to learn to deal with APIs and fetching data.
 I set up a server using express framework and used fetch API to get data from two APIs - weather and air quality. One of them required API key so I learned how to store private API keys using environment variables. Also, I deployed my web app to Heroku cloud platform with GitHub integration. 
 
 What's really happening behind all this?

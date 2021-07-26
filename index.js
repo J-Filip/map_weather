@@ -110,7 +110,7 @@ app.post('/api/weather', async (request, response) =>{
 // ! when client sends GET request to server
 app.get('/api/weather', async  (request, response)=>{
     console.log('GET REQUEST FROM CLIENT');
-        database.find({}).sort({ timestamp:-1}).limit(20).exec(function (err, data) {
+        database.find({}).sort({ timestamp:-1}).exec(function (err, data) {
         if(err){
             response.end();
             return;

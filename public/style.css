@@ -1,71 +1,67 @@
-
 *,
 *::after,
 *::before {
   box-sizing: border-box; /*   doesnt add padding to width  */
 }
-body{
-    margin:0 auto;
-    max-width: 1200px;
+body {
+  margin: 0 auto;
+  max-width: 1200px;
+  background: linear-gradient(to left, #b92b27, #1565c0);
 }
 
-section{
-    padding: 3em 1.8em;    /* up-down, left-right */
-  }
+section {
+  padding: 3em 1.8em; /* up-down, left-right */
+}
 inputbutton {
-    font-size: 1.2rem;
-    padding: .5em;
-    margin: 0.2em;
-  }
-  h1{
-      font-size:  2.5rem;
-  }
-  h2{
-      font-size:  2rem;
-  }
-  h3{
-      font-size: 1.6rem;
-  }
- p{
-    font-size: 1.1rem;
-    line-height: 1.3;
-
+  font-size: 1.2rem;
+  padding: 0.5em;
+  margin: 0.2em;
 }
-.geolocation{
-    background-image: linear-gradient(63deg,white,#cdf0ff);
-    padding: .8em ;
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+p {
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+.geolocation {
+  background-image: linear-gradient(63deg, white, #cdf0ff);
+  padding: 0.8em;
 }
 
 .location-history {
-    background-image: linear-gradient(63deg,white,#cdf0ff);
-    padding: .8em ;
-    padding: .3em .8em;
-    text-align: center;
+  background-image: linear-gradient(63deg, white, #cdf0ff);
+  padding: 0.8em;
+  padding: 0.3em 0.8em;
+  text-align: center;
 }
-.location-history div::after{
-    content: '-';
-    display: block;
-    text-align: center;
+.location-history div::after {
+  content: "-";
+  display: block;
+  text-align: center;
 }
 
 #header a {
-    text-decoration: none;
-    font-weight: 800;
-    color: rgba(50, 174, 245, 0.966);
-    padding-right: 0.7em;
-    font-size: 1.2rem;
+  text-decoration: none;
+  font-weight: 800;
+  color: rgba(50, 174, 245, 0.966);
+  padding-right: 0.7em;
+  font-size: 1.2rem;
 }
 
-button, input{
-    padding: 0.3rem;
-    font-size: .8rem;
+button,
+input {
+  padding: 0.3rem;
+  font-size: 0.8rem;
 }
 
 #mapid {
-    
-    height: 450px;
-    margin: auto;
-  }
-
-
-  
+  height: 450px;
+  margin: auto;
+}

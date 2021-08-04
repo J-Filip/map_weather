@@ -87,7 +87,7 @@ input {
 }
 
 button {
-  background: transparent;
+  background: transparent no-repeat;
   color: white;
   padding: 0.4rem 0.6rem;
   cursor: pointer;

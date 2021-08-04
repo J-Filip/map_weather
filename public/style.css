@@ -76,7 +76,7 @@ p {
 
 button,
 input {
-  padding: 0.5rem;
+  padding: 0.3rem;
   font-size: 1rem;
   margin: 1.4rem 0;
   outline: none;
@@ -84,9 +84,9 @@ input {
 }
 
 button {
-  background: transparent ;
+  background: transparent;
   color: white;
-  padding: 0.5rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -109,7 +109,4 @@ button:hover {
 
 .coordinates p {
   margin: 0.8rem 0;
-}
-
-.header {
 }
